@@ -154,6 +154,32 @@ When using LabelImg, you want to make sure that depending on the number of objec
 
 # Converting XML to CSV
 
-At this point we're going to want to have the xml_to_csv.py file placed in the object detection folder so that we can modify and run it when the file is ready.
+At this point we're going to want to have the xml_to_csv.py file placed in the object detection folder so that we can run it in order to convert all of the XML files to CSV files for the next step. Once the script successfully runs, you should have train_labels and test_labels as csv files in the data folder in object detection.
 
+# Creating TF_records
 
+To create to TF_records we have to first modify and then run the generate_tfrecords.py script which also must be ran from inside the object detection folder.
+
+The first edit will be starting at the def class_text_to_int(row_label) function at line 30:
+```
+def class_text_to_int(row_label):
+    if row_label == 'captcha':
+        return 1
+    elif row_label == 'cursor':
+        return 2
+    elif row_label == 'close':
+        return 3
+    else:
+        None
+```
+
+This is where you will be specifiying the name that you labeled your objects when using labelImg.
+
+If only one object is planning on being detected the function will be changed to this:
+```
+def class_text_to_int(row_label):
+    if row_label == '(your label here)':
+        return 1
+    else:
+        None
+```

@@ -97,38 +97,16 @@ All below pip installs are required both to run Tensorflow as well as run the sc
 This pip command will install the most up to date version of tensorflow-gpu
 ```
 pip install --ignore-installed --upgrade tensorflow-gpu
-```
-```
 pip install keras
-```
-```
 pip install pandas
-```
-```
 pip install numpy
-```
-```
 pip install pillow
-```
-```
 pip install lxml
-```
-```
 pip install Cython
-```
-```
 pip install contextlib2
-```
-```
 pip install jupyter
-```
-```
 pip install matplotlib
-```
-```
 pip install opencv-python
-```
-```
 pip install win32gui
 ```
 # Training your own object model

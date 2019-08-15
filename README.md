@@ -161,4 +161,9 @@ I have decided to use the faster_rcnn_inception_v2_coco_2018_01_28 model, which 
 
 In machine learning, the first thing you usually do when it comes to creating your own custom object detector is creating the custom dataset to train the model on. For each object you detect you're going to want around 100 to 200 images in your dataset that include that object. For the purposes of this project I created the screenshot.py program to help with generating the data I needed for all of the objects. This program takes a screenshot of the current screen and then where-ever the cursor is at the time of the screenshot, it masks a transparent png of the object in place of where the cursor currently is. This allows for faster data generation of raw desktop images that include the objects of interest. When trying to train the cursor and close box icon I decided to crop out a 300 x 300 box around the object randomly so that it would include the object that needed to be detected but was also variable up the data so that the object was not in the same location everytime. The main reason for cropping a 300 x 300 box around the small object is due to the aspect ratio difference between the desktop and the small cursor and close box icon. In my case a 1920 x 1080 desktop compared with a 30 x 30 sized cursor would be too great a size difference for Tensorflow to detect, 300 x 300 in comparison to 30 x 30 allowed much easier detection. The reCaptcha box was a separate case as it was noticebly bigger in comparison to the cursor and close box icon, so I cropped the reCaptcha images to be around 600 x 400 in size.
 
-Once
+Once the dataset is generated, each object of interest in your dataset must be labeled with a bounding box so that Tensorflow knows what to train your detector on.
+
+To do this, I used a program called LabelImg:
+https://tzutalin.github.io/labelImg/
+
+I reccommend downloading Windows 1.8.0 as this is the version I used in labeling my dataset.

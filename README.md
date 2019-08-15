@@ -158,7 +158,7 @@ At this point we're going to want to have the xml_to_csv.py file placed in the o
 
 # Creating TF_records
 
-To create to TF_records we have to first modify and then run the generate_tfrecords.py script which also must be ran from inside the object detection folder.
+To create the TF_records we have to first modify and then run the generate_tfrecords.py script which also must be ran from inside the object detection folder.
 
 The first edit will be starting at the def class_text_to_int(row_label) function at line 30:
 ```

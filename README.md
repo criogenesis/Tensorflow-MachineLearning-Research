@@ -58,15 +58,30 @@ In the windows search bar you can type envi and a prompt to "Edit the system env
 In System Properties, go down to the bottom and click Environment Variables.
 
 Under User Variables, you're going to want to click Path and edit it, we're going to be adding two new paths for the purpose of this tutorial.
-
+```
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp
+```
+You will also need to add a new path called PYTHONPATH and I reccommend adding the following paths:
+```
+C:\Users\hakku\Downloads\models\models-master\research\object_detection\utils
+C:\Users\hakku\Downloads\models\models-master\research\object_detection
+C:\Users\hakku\Downloads\models\models-master\research
+C:\Users\hakku\Downloads\models\models-master\research\slim
+C:\Users\hakku\Downloads\models\models-master
+C:\Users\hakku\Downloads\models\models-master\research\object_detection\training
+```
+This path is entirely dependent on where you decide to keep your models folder which will be discussed in the model training section.
+Make sure you are using the correct path for your settup.
 
 When you've added these paths, click Ok on all corresponding windows
+
+
 
 # Prerequesites and Dependencies
 
 At this point it is assumed you already have Python installed and will not be covered in this tutorial.
+To keep up with consistency I reccommend you install version 3.7 as this is the version I will be using.
 I also highly reccommending that if you do not already to have the to your current python version added to the Path section in Environment Variables like we previously did with CUDA. 
 
 C:\Users\hakku\AppData\Local\Programs\Python\Python37\
@@ -77,6 +92,8 @@ This allows you to be able to run any python script in the cmd window in any dir
 
 going forward now, all prerequistes will be installed using pip, so it is highly reccommended to have the newest version of pip to be able to run these cmds in your cmd prompt window.
 
+All below pip installs are required both to run Tensorflow as well as run the scripts in this project
+
 This pip command will install the most up to date version of tensorflow-gpu
 ```
 pip install --ignore-installed --upgrade tensorflow-gpu
@@ -84,13 +101,58 @@ pip install --ignore-installed --upgrade tensorflow-gpu
 ```
 pip install keras
 ```
-Although pandas and numpy are considered optional, you will need them in order to run the scripts in my project.
 ```
-pip install pandas (optional)
+pip install pandas
 ```
 ```
-pip install numpy (optional)
+pip install numpy
+```
+```
+pip install pillow
+```
+```
+pip install lxml
+```
+```
+pip install Cython
+```
+```
+pip install contextlib2
+```
+```
+pip install jupyter
+```
+```
+pip install matplotlib
+```
+```
+pip install opencv-python
+```
+```
+pip install win32gui
 ```
 # Training your own object model
 
 This section serves two purposes, it serves to first show others how they can train their own object detectors if they desire to add-on to my current detected objects or to to detect objects of their own. It also serves as a sort of tutorial on showing how exactly I developed and trained my own model for my three detected objects.
+
+For the purposes of this section, I will be referencing this youtube video:
+https://www.youtube.com/watch?v=Rgpfk6eYxJA&t=1s
+
+First you need to make sure you download the Tensorflow model folder at https://github.com/tensorflow/models
+When you decide to extract the rar file, make sure that you remove the second models folder that is contained in the first after extracting the rar file. To do this, you will have to go into the second models folder, copy the models-master folder, paste it in the first models folder, and delete the now empty second models folder 
+
+This will alter your path from
+```
+models/models/models-master
+````
+to
+```
+models/models-master
+```
+
+Just make sure you do not delete the models-master folder as that contains all of the important files for this project.
+
+Next, we're going to need to use a model to use as a basis for training so we can use transfer learning:
+http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
+
+I have decided to use the faster_rcnn_inception_v2_coco_2018_01_28 model, which is a very accurate model but can be taxing in terms of processing. For this reason a separate model can be used, but each model requires their own target loss to be achieved below. In this tutorial I will only be talking about the loss values for the faster_rcnn model.

@@ -137,7 +137,12 @@ I have decided to use the faster_rcnn_inception_v2_coco_2018_01_28 model, which 
 
 In machine learning, the first thing you usually do when it comes to creating your own custom object detector is creating the custom dataset to train the model on. For each object you detect you're going to want around 100 to 200 images in your dataset that include that object. For the purposes of this project I created the screenshot.py program to help with generating the data I needed for all of the objects. This program takes a screenshot of the current screen and then where-ever the cursor is at the time of the screenshot, it masks a transparent png of the object in place of where the cursor currently is. This allows for faster data generation of raw desktop images that include the objects of interest. When trying to train the cursor and close box icon I decided to crop out a 300 x 300 box around the object randomly so that it would include the object that needed to be detected but was also variable up the data so that the object was not in the same location everytime. The main reason for cropping a 300 x 300 box around the small object is due to the aspect ratio difference between the desktop and the small cursor and close box icon. In my case a 1920 x 1080 desktop compared with a 30 x 30 sized cursor would be too great a size difference for Tensorflow to detect, 300 x 300 in comparison to 30 x 30 allowed much easier detection. The reCaptcha box was a separate case as it was noticebly bigger in comparison to the cursor and close box icon, so I cropped the reCaptcha images to be around 600 x 400 in size.
 
-At this point, you need to make a folder named train and a folder named test. For each object that you are trying to detect you need to put 20% of the images in test and the rest of the images in train. As an example, if you have 100 images that contain Obect A and 100 images that contain Object B your test folder would contain 40 images (20 from Object A and 20 from Object B). 
+At this point, you need to make a folder named train and a folder named test. For each object that you are trying to detect you need to put 20% of the images in test and the rest of the images in train. As an example, if you have 100 images that contain Obect A and 100 images that contain Object B your test folder would contain 40 images (20 from Object A and 20 from Object B). The rest of the 60 images would be placed in the train folder. At this point, the train and test folders need to be placed in the images folder located in the object detection folder under:
+
+```
+(Your path)\models\models-master\research\object_detection\images
+```
+
 Once the dataset is generated, each object of interest in your dataset must be labeled with a bounding box so that Tensorflow knows what to train your detector on.
 
 To do this, I used a program called LabelImg:
@@ -146,3 +151,9 @@ https://tzutalin.github.io/labelImg/
 I reccommend downloading Windows 1.8.0 as this is the version I used in labeling my dataset.
 
 When using LabelImg, you want to make sure that depending on the number of objects you're trying to detect, you make sure to label each object that is shown in your dataset with the name of the object in question. This is so that we can use the corresponding XML files that are generated for each image for training later on.
+
+# Converting XML to CSV
+
+At this point we're going to want to have the xml_to_csv.py file placed in the object detection folder so that we can modify and run it when the file is ready.
+
+

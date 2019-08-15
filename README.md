@@ -1,4 +1,4 @@
-# Multi-Object Detecotr
+# Multi-Object Detector
 The purpose of this project was to create software using tensorflows object detection api to be able to detect a cursor, reCaptcha box, as well as the close button at the top right of a window. It includes the trained models as well as all the data used for training the models.
 Some modifications were made in the tensorflow sourcecode in order to get the python script to run and will be mentioned below.
 

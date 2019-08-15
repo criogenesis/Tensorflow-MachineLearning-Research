@@ -49,4 +49,48 @@ For me, CUDA was found at C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10
 
 Oncce you're in the v10.0 folder, you're going to want to copy the bin,include, and lib folder from your cuda folder (extracted from the zip) into the v10.0 folder and overwrite the files present.
 
+# Setting up Environment Variables
 
+The next step is to settup the necessary paths in environment variables so Tensorflow knows where to look for all the CUDA dependencies.
+
+In the windows search bar you can type envi and a prompt to "Edit the system environment variables" should show up, click that.
+
+In System Properties, go down to the bottom and click Environment Variables.
+
+Under User Variables, you're going to want to click Path and edit it, we're going to be adding two new paths for the purpose of this tutorial.
+
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp
+
+When you've added these paths, click Ok on all corresponding windows
+
+# Prerequesites and Dependencies
+
+At this point it is assumed you already have Python installed and will not be covered in this tutorial.
+I also highly reccommending that if you do not already to have the to your current python version added to the Path section in Environment Variables like we previously did with CUDA. 
+
+C:\Users\hakku\AppData\Local\Programs\Python\Python37\
+C:\Users\hakku\AppData\Local\Programs\Python\Python37\Scripts\
+(example of my python directories in Path)
+
+This allows you to be able to run any python script in the cmd window in any directory.
+
+going forward now, all prerequistes will be installed using pip, so it is highly reccommended to have the newest version of pip to be able to run these cmds in your cmd prompt window.
+
+This pip command will install the most up to date version of tensorflow-gpu
+```
+pip install --ignore-installed --upgrade tensorflow-gpu
+```
+```
+pip install keras
+```
+Although pandas and numpy are considered optional, you will need them in order to run the scripts in my project.
+```
+pip install pandas (optional)
+```
+```
+pip install numpy (optional)
+```
+# Training your own object model
+
+This section serves two purposes, it serves to first show others how they can train their own object detectors if they desire to add-on to my current detected objects or to to detect objects of their own. It also serves as a sort of tutorial on showing how exactly I developed and trained my own model for my three detected objects.

@@ -175,11 +175,54 @@ def class_text_to_int(row_label):
 
 This is where you will be specifiying the name that you labeled your objects when using labelImg.
 
-If only one object is planning on being detected the function will be changed to this:
+If you are only planning on detectiong one object the function will be changed to this:
 ```
 def class_text_to_int(row_label):
     if row_label == '(your label here)':
         return 1
     else:
         None
+```
+
+Once you have edited the generate_tfrecord.py script you will need to run two separate commands in the cmd prompt while in the object detection folder. 
+
+The first command will be for the train directory
+```
+python generate_tfrecord.py --csv_input=data\train_labels.csv --image_path=images\train --output_path=data\train.record
+```
+The second command will be for the test directory
+```
+python generate_tfrecord.py --csv_input=data\test_labels.csv --image_path=images\test --output_path=data\test.record
+```
+
+If you run across any errors with either commands, make sure that your data folder contains the train_labels.csv and test_labels.csv and that your images folder contains the test and train folder.
+
+# Creating label maps
+
+Once the tf records have been successfully created, you can create your label map, this file is necessary so that tensorflow knows what to label each object during detection.
+
+You'll want to start by making an empty file of type .pbtxt and call it object-detection.pbtxt.
+This is what my object-detection.pbtxt file looks like on the inside:
+```
+item {
+  id: 1
+  name: 'captcha'
+}
+
+item {
+  id: 2
+  name: 'cursor'
+}
+
+item {
+  id: 3
+  name: 'close'
+}
+```
+
+If you notice, the id is the same exact number as the one associated with the function that we just changed in the generate_tfrecord.py script. For this reason, make sure the id's are associated with the correct object name to prevent confusion later on. (If you are only trying to detect one object, make sure you only have one item or it will mess with your training). 
+
+Once the file is created, place it directly into the training folder inside of the object detection folder.
+```
+(your path)\models\models-master\research\object_detection\training
 ```

@@ -296,5 +296,29 @@ Once you have a new cmd prompt window open, make sure you are in your object det
 tensorboard --logdir=training
 ```
 
-This will having tensorboard running at localhost, so while the you leave both the training cmd window and the tensorboard cmd window running in the background, you can open up an browser and type in the following:
+This will having tensorboard running at localhost, so while the you leave both the training cmd window and the tensorboard cmd window running in the background, you can open up an browser and type in following in the browser search bar:
 http://localhost:6006
+
+This will bring you to the tensorboard website, your point of interest lies in the graph labeled Loss/BoxClassifierLoss/classification_loss
+
+looking at this graph, you want the loss value to be below 0.05. This settup is extremely helpful as it shows you a trend of exactly where your loss values are traveling towards and will let you know if anything is going wrong. 
+
+When you are satisfied that the loss value is below 0.05 and you have just saved a summary checkpoint, you can end the training process by typing ctrl+c in the cmd prompt window to end the training process.
+
+# Exporting the inference graph
+
+At this point your model is trained and the inference graph is ready to be exported. When all is said and done, the frozen inference graph contains all the calculated weights that your model uses to properly detect the key objects in your image of interest. For this reason we will be running a cmd in the cmd prompt window that will export our frozen inference graph in the inference graph folder as follows:
+
+```
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph
+```
+
+The most important thing that needs to be changed in this command is the XXXX next to model.ckpt-. These X's should be changed to your most recently generated summary step in the training folder in my case my model stopped training at step 16151, so I would change it to model.ckpt-16151 in the command before I run it.
+
+Once your command runs successfully, you have generated your inference graph.
+
+# Using your model
+
+At this point, I would direct you to the github tutorial at https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10. Here you will find an object detection image.py script and an object detection video.py script depending on what you're looking to test your detection. For the purposes of my project I will be talking about my data and my script, as it was custom designed for my small objects.
+
+# Multi-object-detector.py

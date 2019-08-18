@@ -1,0 +1,38 @@
+<annotation>
+	<folder>X(close_box) Backups</folder>
+	<filename>box74.png</filename>
+	<path>C:\Users\hakku\Downloads\models\models-master\research\object_detection\Backups\X(close_box) Backups\box74.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>500</width>
+		<height>477</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>close</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>428</xmin>
+			<ymin>128</ymin>
+			<xmax>459</xmax>
+			<ymax>144</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>close</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>418</xmin>
+			<ymin>21</ymin>
+			<xmax>468</xmax>
+			<ymax>42</ymax>
+		</bndbox>
+	</object>
+</annotation>

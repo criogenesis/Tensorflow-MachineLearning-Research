@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Captcha-desktop-screenshots</folder>
+	<filename>captchaTestCaptcha60.jpg</filename>
+	<path>E:\Downloads\Captcha-desktop-screenshots\captchaTestCaptcha60.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>602</width>
+		<height>405</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>captcha</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>11</xmin>
+			<ymin>271</ymin>
+			<xmax>146</xmax>
+			<ymax>300</ymax>
+		</bndbox>
+	</object>
+</annotation>

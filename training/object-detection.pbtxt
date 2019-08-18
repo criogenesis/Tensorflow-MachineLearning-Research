@@ -1,0 +1,14 @@
+item {
+  id: 1
+  name: 'captcha'
+}
+
+item {
+  id: 2
+  name: 'cursor'
+}
+
+item {
+  id: 3
+  name: 'close'
+}

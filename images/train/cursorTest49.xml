@@ -1,0 +1,26 @@
+<annotation>
+	<folder>cursor_pics_resized</folder>
+	<filename>cursorTest49.jpg</filename>
+	<path>E:\Downloads\models\models-master\research\object_detection\Cursor Backups\images(Backup Folder)\cursor_pics_resized\cursorTest49.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>340</width>
+		<height>200</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>cursor</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>170</xmin>
+			<ymin>46</ymin>
+			<xmax>183</xmax>
+			<ymax>67</ymax>
+		</bndbox>
+	</object>
+</annotation>

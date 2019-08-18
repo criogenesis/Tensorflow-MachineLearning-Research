@@ -1,0 +1,26 @@
+<annotation>
+	<folder>X(close_box) Backups</folder>
+	<filename>box11.png</filename>
+	<path>E:\Downloads\models\models-master\research\object_detection\Backups\X(close_box) Backups\box11.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>301</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>close</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>251</xmin>
+			<ymin>3</ymin>
+			<xmax>293</xmax>
+			<ymax>23</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -131,6 +131,13 @@ Just make sure you do not delete the models-master folder as that contains all o
 Next, we're going to need to use a model to use as a basis for training so we can use transfer learning:
 http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
 
+once you extract the file, make sure you place it directly in the object detection folder located at 
+```
+(your path)/models/models-master/research/object_detection
+```
+*note that whenever I type (your path) in path directory I am expecting you to include whatever location you have decided to place the models folder in that contains everything.
+
+
 I have decided to use the faster_rcnn_inception_v2_coco_2018_01_28 model, which is a very accurate model but can be taxing in terms of processing. For this reason a separate model can be used, but each model requires their own target loss to be achieved below. In this tutorial I will only be talking about the loss values for the faster_rcnn model.
 
 # Image Labeling
@@ -142,6 +149,7 @@ At this point, you need to make a folder named train and a folder named test. Fo
 ```
 (Your path)\models\models-master\research\object_detection\images
 ```
+
 
 Once the dataset is generated, each object of interest in your dataset must be labeled with a bounding box so that Tensorflow knows what to train your detector on.
 
@@ -226,3 +234,67 @@ Once the file is created, place it directly into the training folder inside of t
 ```
 (your path)\models\models-master\research\object_detection\training
 ```
+
+# Modifying model config file
+
+To make things a little easier, i'm going to include my own config file in this repository. However, you will still need to make changes depending on your own file paths and number of objects being detected.
+
+When you have the file, place it directly into the training folder just like we did with the pbtxt file.
+
+the first change will be on line 9, this says num_classes and it's where you will type in the number of objects you're looking to detect.
+
+the next change will be at line 107, and should be changed to look something like this
+```
+fine_tune_checkpoint: "(your path)/models/models-master/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"
+```
+*note that when copy and pasting file paths, it will most likely put back slashes in by default "\" you will need to change all of them to be foward slashes "/" as shown above so that the script can detect the correct file path
+
+the next change will be starting at line 123, this will point the config file to your train.record file and your label map respectfully
+```
+train_input_reader: {
+  tf_record_input_reader {
+    input_path: "(your path)/models/models-master/research/object_detection/data/train.record"
+  }
+  label_map_path: "(your path)/models/models-master/research/object_detection/training/object-detection.pbtxt"
+}
+```
+
+At line 129, you will need to change num examples to be the number of photos containted in your test directory. In my case I have 128 images so my num_examples is 128 respectively.
+
+the last change will be at line line 137, it's fairly identical to what we changed in line 123.
+In this case we are pointing to test.record instead of train.record, but it is the same label map:
+```
+eval_input_reader: {
+  tf_record_input_reader {
+    input_path: "(your path)/models/models-master/research/object_detection/data/test.record"
+  }
+  label_map_path: "(your path)/models/models-master/research/object_detection/training/object-detection.pbtxt"
+  shuffle: false
+  num_readers: 1
+}
+```
+
+# Training process
+
+At this point all files are ready and configured and you should be able to run the train.py script with (hopefully) no issues.
+
+when in the object detection folder in cmd prompt you will want to enter this command:
+```
+python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
+```
+*note that if you have previously trained a model using the above methods, make sure you delete everything except  your config file and your .pbtxt file or you will come across errors.
+
+Ideally after a little bit of time everything will be recognized properly by tensorflow and you will start to train your model. At this point you will start to see a loss value being generated and changing in size (probably fairly drastically in the beginning). How fast your loss value drops will be entirely dependent on how powerful of a GPU you currently have. The faster the GPU the closer your loss value will be approaching your ideal loss value. For the faster_rcnn model that I am using you will want to be seeing a consistent loss value that is below 0.05. This could take some time, and to full understand where your loss is at overall you're going to want to open up tensorboard on another cmd prompt window.
+
+# Using Tensorboard
+
+Before you do run tensorboard, make sure that at least 10 minutes have gone by or that you have generated a new summary step in your training directory. These saved model steps are there in case you decide that you want to train the model later but need a place to leave off at a checkpoint. It is for this reason that it is highly reccommend you do not stop training until you have just generated a new summary step. When you do see that you have generated a summary step (that is not step 0) you can open up a cmd prompt window.
+
+
+Once you have a new cmd prompt window open, make sure you are in your object detection folder and type the following command:
+```
+tensorboard --logdir=training
+```
+
+This will having tensorboard running at localhost, so while the you leave both the training cmd window and the tensorboard cmd window running in the background, you can open up an browser and type in the following:
+http://localhost:6006

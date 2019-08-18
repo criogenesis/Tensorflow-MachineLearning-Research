@@ -113,6 +113,8 @@ This section serves two purposes, it serves to first show others how they can tr
 
 For the purposes of this section, I will be referencing this youtube video:
 https://www.youtube.com/watch?v=Rgpfk6eYxJA&t=1s
+As well as the corresponding github repo:
+https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
 
 First you need to make sure you download the Tensorflow model folder at https://github.com/tensorflow/models
 When you decide to extract the rar file, make sure that you remove the second models folder that is contained in the first after extracting the rar file. To do this, you will have to go into the second models folder, copy the models-master folder, paste it in the first models folder, and delete the now empty second models folder 
@@ -307,7 +309,7 @@ When you are satisfied that the loss value is below 0.05 and you have just saved
 
 # Exporting the inference graph
 
-At this point your model is trained and the inference graph is ready to be exported. When all is said and done, the frozen inference graph contains all the calculated weights that your model uses to properly detect the key objects in your image of interest. For this reason we will be running a cmd in the cmd prompt window that will export our frozen inference graph in the inference graph folder as follows:
+At this point your model is trained and the inference graph is ready to be exported. When all is said and done, the frozen inference graph contains all the calculated weights that your model uses to properly detect the key objects in your image of interest. For this reason we will be running a cmd in the cmd prompt window that will export our frozen inference graph in the inference graph folder as follows, make sure you're in the object detection folder:
 
 ```
 python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph

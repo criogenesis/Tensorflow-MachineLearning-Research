@@ -279,6 +279,7 @@ eval_input_reader: {
 # Training process
 
 At this point all files are ready and configured and you should be able to run the train.py script with (hopefully) no issues.
+If you are retraining a brand new model after having already trained a model you need to make sure that the Train folder is fully cleared out expcept for the faster_rcnn config file as well as the .pbtxt file and nothing else.
 
 when in the object detection folder in cmd prompt you will want to enter this command:
 ```

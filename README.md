@@ -105,7 +105,7 @@ pip install contextlib2
 pip install jupyter
 pip install matplotlib
 pip install opencv-python
-pip install win32gui
+pip install pywin32
 ```
 # Training your own object model
 

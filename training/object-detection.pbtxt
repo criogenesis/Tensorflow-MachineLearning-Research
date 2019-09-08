@@ -12,3 +12,8 @@ item {
   id: 3
   name: 'close'
 }
+
+item {
+  id: 4
+  name: 'chrome'
+}

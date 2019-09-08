@@ -1,0 +1,26 @@
+<annotation>
+	<folder>chrome images</folder>
+	<filename>chrome31.jpg</filename>
+	<path>C:\Users\hakku\Downloads\models\models-master\research\object_detection\chrome images\chrome31.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>chrome</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>182</xmin>
+			<ymin>45</ymin>
+			<xmax>226</xmax>
+			<ymax>89</ymax>
+		</bndbox>
+	</object>
+</annotation>

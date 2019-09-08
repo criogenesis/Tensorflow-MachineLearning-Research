@@ -32,7 +32,7 @@ from utils import visualization_utils as vis_util
 
 
 # Name of the image being processed
-infile = 'cursortest21.jpg'
+infile = 'captchaTestCaptcha2.jpg'
 
 # variables to be used for splicing
 # 300 is chosen as the default as the cursor and close box objects were trained
@@ -70,7 +70,9 @@ overlapHeight = 40
 
 # initializing percent, so that it can be used as a minimum to see the highest
 # possible bounding box detection percent
-percentNum = 0
+cursor_percent_num = 0
+captcha_percent_num = 0
+chrome_percent_num = 0
 
 # Name of the directory containing the object detection module we're using
 MODEL_NAME = 'inference_graph'
@@ -89,7 +91,7 @@ PATH_TO_LABELS = os.path.join(CWD_PATH, 'training', 'object-detection.pbtxt')
 # Number of classes the object detector can identify
 # If you are trying to detect more objects than this number
 # your label may appear as "N/A" instead of the name of your object.
-NUM_CLASSES = 3
+NUM_CLASSES = 4
 
 # Load the label map.
 # Label maps map indices to category names, so that when the convolution
@@ -133,30 +135,53 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
 ####################################################################
 
+# cursor
+cursorImage = None
+cursorCoords = ()
+
+# captcha
+captchaImage = None
+captchaCoords = ()
+
+# chrome
+chromeImage = None
+chromeCoords = ()
+
+# close
+closeCoordList = []
+closeImageList = []
+
 # x0 coordinates stay constant while the inner for loop changes the y0 values
 # each of the for loops start at 0 and iterate by the chopsize up until either
 # the width(first for loop), or the height(second for loop).
-for x0 in range(0, width, chopsizeWidth):
+for x0 in range(0, width+chopsizeWidth, chopsizeWidth):
+    # The purpose of this if statement, is for the cropped squares in the
+    # first column after the first square
+    # This is because in the very first cropped square,
+    # there exists no overlap.
+    # every square after will have an overlapx of 30
+    if(count > 0):
+        overlapx = overlapx + overlapHeight
     for y0 in range(0, height, chopsizeHeight):
 
-        # The purpose of this if statement, is for the cropped squares in the
-        # first column after the first square
-        # This is because in the very first cropped square,
-        # there exists no overlap.
-        # every square after will have an overlapx of 30
-        if(count == 1 and isFirstColumn):
-            overlapx = overlapx + overlapHeight
-            isFirstColumn = False
-        print(overlapy)
         # This if statement makes sure that every cropped square after
         # the first column has an overlapy of 40, allowing overlap between
         # columns 1 and 2, and then 2 and 3 and so on.
         if(countIntro == 1):
             overlapy = overlapy + overlapWidth
+        # print((y0, x0))
+        # box = (x0-overlapx, y0-overlapy,
+        #        x0+chopsizeWidth-overlapx,
+        #        y0+chopsizeHeight-overlapy)
 
-        box = (x0-overlapx, y0-overlapy,
-               x0+chopsizeWidth-overlapx,
-               y0+chopsizeHeight-overlapy)
+        box = ((width-chopsizeWidth if x0+chopsizeWidth-overlapx > width
+                else x0-overlapx),
+               (height-chopsizeHeight if y0+chopsizeHeight-overlapy > height
+                else y0-overlapy),
+               (width if x0+chopsizeWidth-overlapx > width
+                else x0+chopsizeWidth-overlapx),
+               (height if y0+chopsizeHeight-overlapy > height
+                else y0+chopsizeHeight-overlapy))
 
         image = np.array(img.crop(box))
         image_expanded = np.expand_dims(image, axis=0)
@@ -168,28 +193,64 @@ for x0 in range(0, width, chopsizeWidth):
              detection_classes, num_detections],
             feed_dict={image_tensor: image_expanded})
         # Draw the results of the detection (aka 'visulaize the results')
-        (image, xmin, percentMessage) = vis_util.visualize_boxes_and_labels_on_image_array(
+        (image, box_dict) = vis_util.visualize_boxes_and_labels_on_image_array(
             image,
             np.squeeze(boxes),
             np.squeeze(classes).astype(np.int32),
             np.squeeze(scores),
             category_index,
             use_normalized_coordinates=True,
-            line_thickness=4,
+            line_thickness=2,
             min_score_thresh=0.60)
         cv2.imshow('detector', image)
         cv2.waitKey(0)
-        if percentMessage != 'test':
-            elements = percentMessage[0].split()
-            percent = elements[1].split('%')[0]
-            percentTemp = int(percent)
-            if percentTemp > percentNum:
-                percentNum = percentTemp
-                finalImage = image
-                print(percentNum)
+
+        close_bool = False
+
+        for key, value in box_dict.items():
+            box_left = int(box[0] + value[0])
+            box_right = int(box[0] + value[1])
+            box_bottom = int(box[1] + value[2])
+            box_top = int(box[1] + value[3])
+            # print((box_left, box_right, box_bottom, box_top))
+            # print(box)
+            # print(value)
+            if key != 'test':
+                elements = key.split()
+                # print(elements)
+                name = elements[0].strip(":")
+                percent = elements[1].split('%')[0]
+                percent_temp = int(percent)
+                if name == "cursor" and percent_temp > cursor_percent_num:
+                    cursor_percent_num = percent_temp
+                    cursorImage = image
+
+                    # cursorCoords = tuple(map(operator.add, box, value))
+                    cursorCoords = value
+                if name == "captcha" and percent_temp > captcha_percent_num:
+                    captcha_percent_num = percent_temp
+                    captchaImage = image
+                    captchaCoords = value
+                if name == "chrome" and percent_temp > chrome_percent_num:
+                    chrome_percent_num = percent_temp
+                    chromeImage = image
+                    chromeCoords = value
+                if name == "close":
+                    closeCoords = value
+                    closeCoordList.append(closeCoords)
+                    if close_bool is False:
+                        closeImageList.append(image)
+                        close_bool = True
+                        # percentTemp > percentNum:
+                        # percent_num = percentTemp
+                        # finalImage = image
+                        # print(str(percentNum) + "%")
 
         countIntro = countIntro + 1
-        print('%s %s' % (infile, box))
+        # print(key, value)
+        # print("tag is " + name)
+        # print('%s %s' % (infile, box))
+        print(box)
     count = count + 1
     countIntro = 0
     overlapy = 0
@@ -197,8 +258,26 @@ for x0 in range(0, width, chopsizeWidth):
 
 
 # Press any key to close the image
-cv2.imshow('Object detector', finalImage)
-cv2.waitKey(0)
+if cursorImage is not None:
+    cv2.imshow('Cursor', cursorImage)
+    print(cursor_percent_num)
+    print(cursorCoords)
+    cv2.waitKey(0)
+if captchaImage is not None:
+    cv2.imshow('Captcha Box', captchaImage)
+    print(captcha_percent_num)
+    print(captchaCoords)
+    cv2.waitKey(0)
+if chromeImage is not None:
+    cv2.imshow('Chrome Icon', chromeImage)
+    print(chrome_percent_num)
+    print(chromeCoords)
+    cv2.waitKey(0)
+if len(closeImageList) > 0:
+    for x in closeImageList:
+        cv2.imshow('Close Box', x)
+        cv2.waitKey(0)
+    print(closeCoordList)
 
 # Clean up
 cv2.destroyAllWindows()

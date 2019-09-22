@@ -324,6 +324,12 @@ Once your command runs successfully, you have generated your inference graph.
 
 At this point, I would direct you to the github tutorial at https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10. Here you will find an object detection image.py script and an object detection video.py script depending on what you're looking to test your detection. For the purposes of my project I will be talking about my data and my script, as it was custom designed for my small objects.
 
-# Multi-object-detector.py
+# Multi_Object_Detect_Demo.py and Multi_Object_Detect_Function.py
 
-Currently the script loads in the frozen inference graph as well as a picture example that you manually put into the code as a .jpg or .png file. The script takes the image and segments it into 300 x 300 square regardless of size, and if one of the three trained objects is shown in one of the crops, it will show with a corresponding bounding box and percentage. the 300 x 300 crops are cycled by pressing "q" on the keyboard until you are brought to the very end, in which the highest possible detection is shown. The purpose and execution of this script may be changed at a later date, but this is currently how the script runs. For testing purposes I have uploaded a png file that can be used to test my model and the script.
+Orignally my research concerned the Multi_Object_Detect_Demo script as it's own standalone test program. The purpose of this program was to detect Four separate object that could occur in the same desktop screenshot. The program would use the desktop screenshot as a jpg and would iterate through the desktop in slices. These slices consist of 300 x 300 sized crops where each crop is processed. Once the crop is processed, if any of the four objects are detected, a bounding box is put around the object and a percentage of how likely that object is in the crop is displayed next to the label (Cursor: 99%).
+
+(Insert screenshot here)
+
+Depending on how big the screen shot is in resolution, the script iterates through all of the 300 x 300 crops that appear in the screenshot at a speciefied overlap. This means that if the object to be detected like a small cursor appears in the screenshot, an overlap of 30 pixels will ensure that that detection is not missed.
+
+(Insert screen shot with and without overlap)

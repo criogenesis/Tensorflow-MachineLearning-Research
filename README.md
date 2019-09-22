@@ -324,7 +324,7 @@ Once your command runs successfully, you have generated your inference graph.
 
 At this point, I would direct you to the github tutorial at https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10. Here you will find an object detection image.py script and an object detection video.py script depending on what you're looking to test your detection. For the purposes of my project I will be talking about my data and my script, as it was custom designed for my small objects.
 
-# Multi_Object_Detect_Demo.py and Multi_Object_Detect_Function.py
+# Multi_Object_Detect_Demo.py
 
 Orignally my research concerned the Multi_Object_Detect_Demo script as it's own standalone test program. The purpose of this program was to detect Four separate object that could occur in the same desktop screenshot. The program would use the desktop screenshot as a jpg and would iterate through the desktop in slices. These slices consist of 300 x 300 sized crops where each crop is processed. Once the crop is processed, if any of the four objects are detected, a bounding box is put around the object and a percentage of how likely that object is in the crop is displayed next to the label (Cursor: 99%).
 
@@ -333,3 +333,9 @@ Orignally my research concerned the Multi_Object_Detect_Demo script as it's own 
 Depending on how big the screen shot is in resolution, the script iterates through all of the 300 x 300 crops that appear in the screenshot at a speciefied overlap. This means that if the object to be detected like a small cursor appears in the screenshot, an overlap of 30 pixels will ensure that that detection is not missed.
 
 (Insert screen shot with and without overlap)
+
+After iterating through all possible crops, the program displays the crops that included all 4 of the objects, if all 4 of the objects were present in the screenshot. This script was meant for testing purposes to show the capability of the object detection.
+
+Multi_Object_Detect_Function.py
+
+the Multi_Object_Detect_Function script was a little different for one main reason, creating an API for the use of other programs. This took the main concept of the script and fuctionalized it. For Object detection, this means that the core concepts of the original script were the same except for a couple differences. The new script takes everything in the original script and places it inside a function called recieve_objects. This function takes in a list of strings in which each string in the list is the name of one of the objects. The first main difference is that instead of pulling in a jpg of a screenshot in the same directory as input, the program takes a screenshot of the desktop itself and uses that as input. The other main difference is at the end of the script. Using whatever objects were in the original list as input, the script calculates coordinates. These coordinates are the X,Y coordinates of the top left and bottom right of the bounding box that were used in detection. Each of these coordinates are then paired with the name of the object they are related to and are placed inside a dictionary. The name of the object is the key and appears as a string, the coordinates of the object are the value and appear as a tupple of four integers (left, right, top, bottom). At this point the function returns the dictionary to whatever script is calling it. This allows anyone else to take advantage of the object detection capabilities of the script for whatever purposes they need.

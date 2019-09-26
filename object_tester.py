@@ -1,6 +1,6 @@
 
 
-import Multi_Object_Detect as mod
+import Multi_Object_Detect_Function as mod
 import pyautogui as pyag
 import time
 

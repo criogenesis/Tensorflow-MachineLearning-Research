@@ -19,9 +19,8 @@ NumberOfScreenshots = int(input("How many Screenshots would " +
 count = 1
 
 screenDecision = input(
-    "Will you be taking cursor screenshots, captcha screenshots, or " +
-    "chrome icon screenshots? Type 1 for cursor, 2 for captcha" +
-    "or 3 for chrome icon:\n")
+    "Type 1 for cursor\n2 for captcha\n3 for chrome icon\n" +
+    "4 for edge icon\nor 5 for normal screenshot: \n")
 
 toggle = True
 time.sleep(5)
@@ -71,6 +70,25 @@ while(count <= NumberOfScreenshots):
         print(fileName)
         im.save(fileName, "JPEG")
         winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+    if screenDecision == "4":
+        im = ImageGrab.grab()
+        edge = Image.open('microsoft_edge_icon.png')
+
+        curX, curY = win32gui.GetCursorPos()
+        im.paste(edge, box=(curX, curY), mask=edge)
+
+        fileName = "edge%d.jpg" % count
+        print(fileName)
+        im.save(fileName, "JPEG")
+        winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+    if screenDecision == "5":
+        im = ImageGrab.grab()
+
+        fileName = "Desktop%d.jpg" % count
+        print(fileName)
+        im.save(fileName, "JPEG")
+        winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+
 
     count = count + 1
     time.sleep(2)

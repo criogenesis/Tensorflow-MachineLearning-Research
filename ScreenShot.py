@@ -20,7 +20,10 @@ count = 1
 
 screenDecision = input(
     "Type 1 for cursor\n2 for captcha\n3 for chrome icon\n" +
-    "4 for edge icon\nor 5 for normal screenshot: \n")
+    "4 for edge icon\n5 for firefox icon\n" +
+    "or 6 for opera icon: \n")
+
+DeskOrMask = input("type 1 for masked screenshot or 2 for desktop screenshot:\n")
 
 toggle = True
 time.sleep(5)
@@ -60,34 +63,82 @@ while(count <= NumberOfScreenshots):
             im.save(fileName, "JPEG")
             toggle = True
     if screenDecision == "3":
-        im = ImageGrab.grab()
-        chrome = Image.open('google-chrome-icon-small.png')
+        if DeskOrMask == "1":
+            im = ImageGrab.grab()
+            chrome = Image.open('google-chrome-icon-small.png')
 
-        curX, curY = win32gui.GetCursorPos()
-        im.paste(chrome, box=(curX, curY), mask=chrome)
+            curX, curY = win32gui.GetCursorPos()
+            im.paste(chrome, box=(curX, curY), mask=chrome)
 
-        fileName = "chrome%d.jpg" % count
-        print(fileName)
-        im.save(fileName, "JPEG")
-        winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+            fileName = "chrome%d.jpg" % count
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+        else:
+            im = ImageGrab.grab()
+
+            fileName = "chrome%d.jpg" % (count+100)
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
     if screenDecision == "4":
-        im = ImageGrab.grab()
-        edge = Image.open('microsoft_edge_icon.png')
+        if DeskOrMask == "1":
+            im = ImageGrab.grab()
+            edge = Image.open('microsoft_edge_icon.png')
 
-        curX, curY = win32gui.GetCursorPos()
-        im.paste(edge, box=(curX, curY), mask=edge)
+            curX, curY = win32gui.GetCursorPos()
+            im.paste(edge, box=(curX, curY), mask=edge)
 
-        fileName = "edge%d.jpg" % count
-        print(fileName)
-        im.save(fileName, "JPEG")
-        winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+            fileName = "edge%d.jpg" % count
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+        else:
+            im = ImageGrab.grab()
+
+            fileName = "edge%d.jpg" % (count+100)
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
     if screenDecision == "5":
-        im = ImageGrab.grab()
+        if DeskOrMask == "1":
+            im = ImageGrab.grab()
+            firefox= Image.open('firefox_icon.png')
 
-        fileName = "Desktop%d.jpg" % count
-        print(fileName)
-        im.save(fileName, "JPEG")
+            curX, curY = win32gui.GetCursorPos()
+            im.paste(firefox, box=(curX, curY), mask=firefox)
+
+            fileName = "firefox%d.jpg" % count
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+        else:
+            im = ImageGrab.grab()
+
+            fileName = "firefox%d.jpg" % (count+100)
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+    if screenDecision == "6":
+        if DeskOrMask == "1":
+            im = ImageGrab.grab()
+            opera= Image.open('opera_icon.png')
+
+            curX, curY = win32gui.GetCursorPos()
+            im.paste(opera, box=(curX, curY), mask=opera)
+
+            fileName = "opera%d.jpg" % count
+            print(fileName)
+            im.save(fileName, "JPEG")
+        else:
+            im = ImageGrab.grab()
+
+            fileName = "operax%d.jpg" % (count+100)
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+
 
 
     count = count + 1

@@ -8,6 +8,7 @@ from PIL import Image
 import time
 import win32gui
 import winsound
+import random
 from ctypes import windll
 user32 = windll.user32
 user32.SetProcessDPIAware()
@@ -17,7 +18,6 @@ NumberOfScreenshots = int(input("How many Screenshots would " +
                                 "you like taken?:\n"))
 
 count = 1
-
 screenDecision = input(
     "Type 1 for cursor\n2 for captcha\n3 for chrome icon\n" +
     "4 for edge icon\n5 for firefox icon\n" +
@@ -84,14 +84,39 @@ while(count <= NumberOfScreenshots):
     if screenDecision == "4":
         if DeskOrMask == "1":
             im = ImageGrab.grab()
+            width, height = im.size
             edge = Image.open('microsoft_edge_icon.png')
 
             curX, curY = win32gui.GetCursorPos()
+
+            leftMin = curX - 286
+            leftMax = leftMin + 272
+            topMin = curY - 286
+            topMax = topMin + 272
+
+            if (topMax + 300) > height:
+                topMax = height - 300
+            if (topMin - 286) < 0:
+                topMin = 0
+            if (leftMax + 300) > width:
+                leftMax = width - 300
+            if (leftMin - 286) < 0:
+                leftMin = 0
+
+            randomLeft = random.randint(leftMin-1, leftMax)
+            randomTop = random.randint(topMin-1, topMax)
+            randomRight = randomLeft + 300
+            randomBottom = randomTop + 300
+
+            curX = curX - 14
+            curY = curY - 14
             im.paste(edge, box=(curX, curY), mask=edge)
+            box = (randomLeft, randomTop, randomRight, randomBottom)
+            crop = im.crop(box)
 
             fileName = "edge%d.jpg" % count
             print(fileName)
-            im.save(fileName, "JPEG")
+            crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         else:
             im = ImageGrab.grab()
@@ -103,14 +128,40 @@ while(count <= NumberOfScreenshots):
     if screenDecision == "5":
         if DeskOrMask == "1":
             im = ImageGrab.grab()
+
+            width, height = im.size
             firefox= Image.open('firefox_icon.png')
 
             curX, curY = win32gui.GetCursorPos()
+
+            leftMin = curX - 284
+            leftMax = leftMin + 268
+            topMin = curY - 284
+            topMax = topMin + 268
+
+            if (topMax + 300) > height:
+                topMax = height - 300
+            if (topMin) < 0:
+                topMin = 0
+            if (leftMax + 300) > width:
+                leftMax = width - 300
+            if (leftMin) < 0:
+                leftMin = 0
+
+            randomLeft = random.randint(leftMin-1, leftMax)
+            randomTop = random.randint(topMin-1, topMax)
+            randomRight = randomLeft + 300
+            randomBottom = randomTop + 300
+
+            curX = curX - 16
+            curY = curY - 16
             im.paste(firefox, box=(curX, curY), mask=firefox)
+            box = (randomLeft, randomTop, randomRight, randomBottom)
+            crop = im.crop(box)
 
             fileName = "firefox%d.jpg" % count
             print(fileName)
-            im.save(fileName, "JPEG")
+            crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         else:
             im = ImageGrab.grab()
@@ -122,14 +173,40 @@ while(count <= NumberOfScreenshots):
     if screenDecision == "6":
         if DeskOrMask == "1":
             im = ImageGrab.grab()
+            width, height = im.size
             opera= Image.open('opera_icon.png')
 
             curX, curY = win32gui.GetCursorPos()
-            im.paste(opera, box=(curX, curY), mask=opera)
+
+            leftMin = curX - 284
+            leftMax = leftMin + 268
+            topMin = curY - 284
+            topMax = topMin + 268
+
+            if (topMax + 300) > height:
+                topMax = height - 300
+            if (topMin - 284) < 0:
+                topMin = 0
+            if (leftMax + 300) > width:
+                leftMax = width - 300
+            if (leftMin - 284) < 0:
+                leftMin = 0
+
+            randomLeft = random.randint(leftMin-1, leftMax)
+            randomTop = random.randint(topMin-1, topMax)
+            randomRight = randomLeft + 300
+            randomBottom = randomTop + 300
+
+            curX = curX - 16
+            curY = curY - 16
+            im.paste(firefox, box=(curX, curY), mask=firefox)
+            box = (randomLeft, randomTop, randomRight, randomBottom)
+            crop = im.crop(box)
 
             fileName = "opera%d.jpg" % count
             print(fileName)
-            im.save(fileName, "JPEG")
+            crop.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         else:
             im = ImageGrab.grab()
 
@@ -142,6 +219,6 @@ while(count <= NumberOfScreenshots):
 
 
     count = count + 1
-    time.sleep(2)
+    #time.sleep(2)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)

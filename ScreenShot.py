@@ -121,9 +121,38 @@ while(count <= NumberOfScreenshots):
         else:
             im = ImageGrab.grab()
 
+            width, height = im.size
+            curX, curY = win32gui.GetCursorPos()
+
+            curX = curX - 38
+
+            leftMin = curX - 276
+            leftMax = leftMin + 252
+            topMin = curY - 276
+            topMax = topMin + 252
+
+            if (topMax + 300) > height:
+                topMax = height - 300
+            if (topMin) < 0:
+                topMin = 0
+            if (leftMax + 300) > width:
+                leftMax = width - 300
+            if (leftMin) < 0:
+                leftMin = 0
+
+            randomLeft = random.randint(leftMin-1, leftMax)
+            randomTop = random.randint(topMin-1, topMax)
+            randomRight = randomLeft + 300
+            randomBottom = randomTop + 300
+
+            curX = curX - 24
+            curY = curY - 24
+            box = (randomLeft, randomTop, randomRight, randomBottom)
+            crop = im.crop(box)
+
             fileName = "edge%d.jpg" % (count+100)
             print(fileName)
-            im.save(fileName, "JPEG")
+            crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
     if screenDecision == "5":
         if DeskOrMask == "1":
@@ -165,10 +194,38 @@ while(count <= NumberOfScreenshots):
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         else:
             im = ImageGrab.grab()
+            width, height = im.size
+            curX, curY = win32gui.GetCursorPos()
+
+            curX = curX - 38
+
+            leftMin = curX - 276
+            leftMax = leftMin + 252
+            topMin = curY - 276
+            topMax = topMin + 252
+
+            if (topMax + 300) > height:
+                topMax = height - 300
+            if (topMin) < 0:
+                topMin = 0
+            if (leftMax + 300) > width:
+                leftMax = width - 300
+            if (leftMin) < 0:
+                leftMin = 0
+
+            randomLeft = random.randint(leftMin-1, leftMax)
+            randomTop = random.randint(topMin-1, topMax)
+            randomRight = randomLeft + 300
+            randomBottom = randomTop + 300
+
+            curX = curX - 24
+            curY = curY - 24
+            box = (randomLeft, randomTop, randomRight, randomBottom)
+            crop = im.crop(box)
 
             fileName = "firefox%d.jpg" % (count+100)
             print(fileName)
-            im.save(fileName, "JPEG")
+            crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
     if screenDecision == "6":
         if DeskOrMask == "1":
@@ -210,9 +267,38 @@ while(count <= NumberOfScreenshots):
         else:
             im = ImageGrab.grab()
 
-            fileName = "operax%d.jpg" % (count+100)
+            width, height = im.size
+            curX, curY = win32gui.GetCursorPos()
+
+            curX = curX - 38
+
+            leftMin = curX - 276
+            leftMax = leftMin + 252
+            topMin = curY - 276
+            topMax = topMin + 252
+
+            if (topMax + 300) > height:
+                topMax = height - 300
+            if (topMin) < 0:
+                topMin = 0
+            if (leftMax + 300) > width:
+                leftMax = width - 300
+            if (leftMin) < 0:
+                leftMin = 0
+
+            randomLeft = random.randint(leftMin-1, leftMax)
+            randomTop = random.randint(topMin-1, topMax)
+            randomRight = randomLeft + 300
+            randomBottom = randomTop + 300
+
+            curX = curX - 24
+            curY = curY - 24
+            box = (randomLeft, randomTop, randomRight, randomBottom)
+            crop = im.crop(box)
+
+            fileName = "opera%d.jpg" % (count+100)
             print(fileName)
-            im.save(fileName, "JPEG")
+            crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 

@@ -96,11 +96,11 @@ while(count <= NumberOfScreenshots):
 
             if (topMax + 300) > height:
                 topMax = height - 300
-            if (topMin - 286) < 0:
+            if (topMin) < 0:
                 topMin = 0
             if (leftMax + 300) > width:
                 leftMax = width - 300
-            if (leftMin - 286) < 0:
+            if (leftMin) < 0:
                 leftMin = 0
 
             randomLeft = random.randint(leftMin-1, leftMax)
@@ -124,12 +124,12 @@ while(count <= NumberOfScreenshots):
             width, height = im.size
             curX, curY = win32gui.GetCursorPos()
 
-            curX = curX - 38
+            curX = curX - 45
 
-            leftMin = curX - 276
-            leftMax = leftMin + 252
-            topMin = curY - 276
-            topMax = topMin + 252
+            leftMin = curX - 269
+            leftMax = leftMin + 238
+            topMin = curY - 269
+            topMax = topMin + 238
 
             if (topMax + 300) > height:
                 topMax = height - 300
@@ -145,8 +145,8 @@ while(count <= NumberOfScreenshots):
             randomRight = randomLeft + 300
             randomBottom = randomTop + 300
 
-            curX = curX - 24
-            curY = curY - 24
+            curX = curX - 31
+            curY = curY - 31
             box = (randomLeft, randomTop, randomRight, randomBottom)
             crop = im.crop(box)
 
@@ -159,7 +159,7 @@ while(count <= NumberOfScreenshots):
             im = ImageGrab.grab()
 
             width, height = im.size
-            firefox= Image.open('firefox_icon.png')
+            firefox = Image.open('firefox_icon.png')
 
             curX, curY = win32gui.GetCursorPos()
 
@@ -231,7 +231,7 @@ while(count <= NumberOfScreenshots):
         if DeskOrMask == "1":
             im = ImageGrab.grab()
             width, height = im.size
-            opera= Image.open('opera_icon.png')
+            opera = Image.open('opera_icon.png')
 
             curX, curY = win32gui.GetCursorPos()
 
@@ -242,11 +242,11 @@ while(count <= NumberOfScreenshots):
 
             if (topMax + 300) > height:
                 topMax = height - 300
-            if (topMin - 284) < 0:
+            if (topMin) < 0:
                 topMin = 0
             if (leftMax + 300) > width:
                 leftMax = width - 300
-            if (leftMin - 284) < 0:
+            if (leftMin) < 0:
                 leftMin = 0
 
             randomLeft = random.randint(leftMin-1, leftMax)
@@ -302,9 +302,7 @@ while(count <= NumberOfScreenshots):
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
         winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 
-
-
     count = count + 1
-    #time.sleep(2)
+    # time.sleep(2)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)

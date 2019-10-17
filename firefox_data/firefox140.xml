@@ -1,0 +1,26 @@
+<annotation>
+	<folder>firefox_data</folder>
+	<filename>firefox140.jpg</filename>
+	<path>C:\Users\hakku\Downloads\Tensorflow-MachineLearning-Research\firefox_data\firefox140.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>firefox</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>162</xmin>
+			<ymin>7</ymin>
+			<xmax>209</xmax>
+			<ymax>56</ymax>
+		</bndbox>
+	</object>
+</annotation>

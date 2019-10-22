@@ -1,0 +1,26 @@
+<annotation>
+	<folder>opera_data</folder>
+	<filename>opera125.jpg</filename>
+	<path>C:\Users\hakku\Downloads\Tensorflow-MachineLearning-Research\opera_data\opera125.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>opera</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>61</xmin>
+			<ymin>171</ymin>
+			<xmax>119</xmax>
+			<ymax>229</ymax>
+		</bndbox>
+	</object>
+</annotation>

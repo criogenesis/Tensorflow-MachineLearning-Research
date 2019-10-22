@@ -1,0 +1,26 @@
+<annotation>
+	<folder>edge_data</folder>
+	<filename>edge15.jpg</filename>
+	<path>C:\Users\hakku\Downloads\Tensorflow-MachineLearning-Research\edge_data\edge15.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>edge</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>217</xmin>
+			<ymin>36</ymin>
+			<xmax>238</xmax>
+			<ymax>59</ymax>
+		</bndbox>
+	</object>
+</annotation>

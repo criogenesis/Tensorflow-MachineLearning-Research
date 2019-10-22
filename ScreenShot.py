@@ -18,6 +18,8 @@ NumberOfScreenshots = int(input("How many Screenshots would " +
                                 "you like taken?:\n"))
 
 count = 1
+startPoint = int(input("What should we set count to?:\n"))
+
 screenDecision = input(
     "Type 1 for cursor\n2 for captcha\n3 for chrome icon\n" +
     "4 for edge icon\n5 for firefox icon\n" +
@@ -26,7 +28,7 @@ screenDecision = input(
 DeskOrMask = input("type 1 for masked screenshot or 2 for desktop screenshot:\n")
 
 toggle = True
-time.sleep(5)
+# time.sleep(5)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 
 while(count <= NumberOfScreenshots):
@@ -256,7 +258,7 @@ while(count <= NumberOfScreenshots):
 
             curX = curX - 16
             curY = curY - 16
-            im.paste(firefox, box=(curX, curY), mask=firefox)
+            im.paste(opera, box=(curX, curY), mask=opera)
             box = (randomLeft, randomTop, randomRight, randomBottom)
             crop = im.crop(box)
 
@@ -270,12 +272,12 @@ while(count <= NumberOfScreenshots):
             width, height = im.size
             curX, curY = win32gui.GetCursorPos()
 
-            curX = curX - 38
+            curX = curX - 47
 
-            leftMin = curX - 276
-            leftMax = leftMin + 252
-            topMin = curY - 276
-            topMax = topMin + 252
+            leftMin = curX - 271
+            leftMax = leftMin + 242
+            topMin = curY - 271
+            topMax = topMin + 242
 
             if (topMax + 300) > height:
                 topMax = height - 300
@@ -296,13 +298,14 @@ while(count <= NumberOfScreenshots):
             box = (randomLeft, randomTop, randomRight, randomBottom)
             crop = im.crop(box)
 
-            fileName = "opera%d.jpg" % (count+100)
+            fileName = "opera%d.jpg" % (startPoint+100)
             print(fileName)
             crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
-        winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+        #winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 
     count = count + 1
+    startPoint = startPoint + 1
     # time.sleep(2)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 winsound.PlaySound('sound.wav', winsound.SND_FILENAME)

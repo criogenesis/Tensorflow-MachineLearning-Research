@@ -32,7 +32,7 @@ from utils import visualization_utils as vis_util
 
 
 # Name of the image being processed
-infile = 'captchaTestCaptcha2.jpg'
+infile = 'edge101.jpg'
 
 # variables to be used for splicing
 # 300 is chosen as the default as the cursor and close box objects were trained
@@ -73,6 +73,10 @@ overlapHeight = 40
 cursor_percent_num = 0
 captcha_percent_num = 0
 chrome_percent_num = 0
+firefox_percent_num = 0
+edge_percent_num = 0
+opera_percent_num = 0
+
 
 # Name of the directory containing the object detection module we're using
 MODEL_NAME = 'inference_graph'
@@ -134,6 +138,20 @@ detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
 num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
 ####################################################################
+
+# opera
+
+operaImage = None
+operaCoords = ()
+# edge
+
+edgeImage = None
+edgeCoords = ()
+
+# firefox
+
+firefoxImage = None
+firefoxCoords = ()
 
 # cursor
 cursorImage = None
@@ -235,6 +253,18 @@ for x0 in range(0, width+chopsizeWidth, chopsizeWidth):
                     chrome_percent_num = percent_temp
                     chromeImage = image
                     chromeCoords = value
+                if name == "firefox" and percent_temp > firefox_percent_num:
+                    firefox_percent_num = percent_temp
+                    firefoxImage = image
+                    firefoxCoords = value
+                if name == "edge" and percent_temp > edge_percent_num:
+                    edge_percent_num = percent_temp
+                    edgeImage = image
+                    edgeCoords = value
+                if name == "opera" and percent_temp > opera_percent_num:
+                    opera_percent_num = percent_temp
+                    operaImage = image
+                    operaCoords = value
                 if name == "close":
                     closeCoords = value
                     closeCoordList.append(closeCoords)
@@ -278,6 +308,18 @@ if len(closeImageList) > 0:
         cv2.imshow('Close Box', x)
         cv2.waitKey(0)
     print(closeCoordList)
+if firefoxImage is not None:
+    cv2.imshow('Firefox', firefoxImage)
+    print(firefox_percent_num)
+    cv2.waitKey(0)
+if edgeImage is not None:
+    cv2.imshow('Edge', edgeImage)
+    print(edge_percent_num)
+    cv2.waitKey(0)
+if operaImage is not None:
+    cv2.imshow('Opera', operaImage)
+    print(opera_percent_num)
+    cv2.waitKey(0)
 
 # Clean up
 cv2.destroyAllWindows()

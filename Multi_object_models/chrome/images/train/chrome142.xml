@@ -1,0 +1,26 @@
+<annotation>
+	<folder>chrome images</folder>
+	<filename>chrome142.jpg</filename>
+	<path>D:\chrome images\chrome142.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>chrome</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>46</xmin>
+			<ymin>38</ymin>
+			<xmax>105</xmax>
+			<ymax>98</ymax>
+		</bndbox>
+	</object>
+</annotation>

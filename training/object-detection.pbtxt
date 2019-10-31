@@ -1,19 +1,19 @@
 item {
   id: 1
-  name: 'captcha'
+  name: 'chrome'
 }
 
 item {
   id: 2
-  name: 'cursor'
+  name: 'firefox'
 }
 
 item {
   id: 3
-  name: 'close'
+  name: 'edge'
 }
 
 item {
   id: 4
-  name: 'chrome'
+  name: 'opera'
 }

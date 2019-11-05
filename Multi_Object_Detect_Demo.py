@@ -32,7 +32,7 @@ from utils import visualization_utils as vis_util
 
 
 # Name of the image being processed
-infile = 'edge101.jpg'
+infile = 'test.png'
 
 # variables to be used for splicing
 # 300 is chosen as the default as the cursor and close box objects were trained

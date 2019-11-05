@@ -39,6 +39,9 @@ def recieve_object(object_to_detect_list):
 
     is_cursor_included = False
     is_chrome_included = False
+    is_firefox_included = False
+    is_edge_included = False
+    is_opera_included = False
 
     object_and_coords_dict = {}
 
@@ -47,6 +50,12 @@ def recieve_object(object_to_detect_list):
             is_cursor_included = True
         elif(x == 'chrome'):
             is_chrome_included = True
+        elif(x == 'firefox'):
+            is_firefox_included = True
+        elif(x == 'edge'):
+            is_edge_included = True
+        elif(x == 'opera'):
+            is_opera_included = True
 
     # variables to be used for splicing
     # 300 is chosen as the default as the cursor and close box objects were trained
@@ -95,6 +104,9 @@ def recieve_object(object_to_detect_list):
     cursor_percent_num = 0
     captcha_percent_num = 0
     chrome_percent_num = 0
+    firefox_percent_num = 0
+    edge_percent_num = 0
+    opera_percent_num = 0
 
     # Name of the directory containing the object detection module we're using
     MODEL_NAME = 'inference_graph'
@@ -156,6 +168,14 @@ def recieve_object(object_to_detect_list):
     num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
     ####################################################################
+    # opera
+    operaCoords = ()
+
+    # edge
+    edgeCoords = ()
+
+    # firefox
+    firefoxCoords = ()
 
     # cursor
     cursorImage = None
@@ -247,11 +267,26 @@ def recieve_object(object_to_detect_list):
                         captcha_percent_num = percent_temp
                         captchaImage = image
                         captchaCoords = value
-                    if name == "chrome" and percent_temp > chrome_percent_num and is_chrome_included:
+                    if (name == "chrome" and percent_temp >
+                            chrome_percent_num and is_chrome_included):
                         chrome_percent_num = percent_temp
-                        chromeImage = image
                         chromeCoords = (box_left, box_right, box_bottom, box_top)
                         object_and_coords_dict.update({name: chromeCoords})
+                    if (name == "firefox" and percent_temp >
+                            firefox_percent_num and is_firefox_included):
+                        firefox_percent_num = percent_temp
+                        firefoxCoords = (box_left, box_right, box_bottom, box_top)
+                        object_and_coords_dict.update({name: firefoxCoords})
+                    if (name == "edge" and percent_temp >
+                            edge_percent_num and is_edge_included):
+                        edge_percent_num = percent_temp
+                        edgeCoords = (box_left, box_right, box_bottom, box_top)
+                        object_and_coords_dict.update({name: edgeCoords})
+                    if (name == "opera" and percent_temp >
+                            opera_percent_num and is_opera_included):
+                        opera_percent_num = percent_temp
+                        operaCoords = (box_left, box_right, box_bottom, box_top)
+                        object_and_coords_dict.update({name: operaCoords})
                     if name == "close":
                         closeCoords = value
                         closeCoordList.append(closeCoords)
@@ -269,29 +304,3 @@ def recieve_object(object_to_detect_list):
         overlapy = 0
 
     return object_and_coords_dict
-###############################################################################
-
-# Press any key to close the image
-# if cursorImage is not None:
-#     cv2.imshow('Cursor', cursorImage)
-#     print(cursor_percent_num)
-#     print(cursorCoords)
-#     cv2.waitKey(0)
-# if captchaImage is not None:
-#     cv2.imshow('Captcha Box', captchaImage)
-#     print(captcha_percent_num)
-#     print(captchaCoords)
-#     cv2.waitKey(0)
-# if chromeImage is not None:
-#     cv2.imshow('Chrome Icon', chromeImage)
-#     print(chrome_percent_num)
-#     print(chromeCoords)
-#     cv2.waitKey(0)
-# if len(closeImageList) > 0:
-#     for x in closeImageList:
-#         cv2.imshow('Close Box', x)
-#         cv2.waitKey(0)
-#     print(closeCoordList)
-#
-# # Clean up
-# cv2.destroyAllWindows()

@@ -23,7 +23,8 @@ startPoint = int(input("What should we set count to?:\n"))
 screenDecision = input(
     "Type 1 for cursor\n2 for captcha\n3 for chrome icon\n" +
     "4 for edge icon\n5 for firefox icon\n" +
-    "or 6 for opera icon: \n")
+    "or 6 for opera icon \n" +
+    "or 7 for Desktop only: ")
 
 DeskOrMask = input("type 1 for masked screenshot or 2 for desktop screenshot:\n")
 
@@ -302,7 +303,16 @@ while(count <= NumberOfScreenshots):
             print(fileName)
             crop.save(fileName, "JPEG")
             winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
-        #winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+        # winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+    if screenDecision == "7":
+        if DeskOrMask == "2":
+            im = ImageGrab.grab()
+            width, height = im.size
+
+            fileName = "Desk%d.jpg" % count
+            print(fileName)
+            im.save(fileName, "JPEG")
+            winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
 
     count = count + 1
     startPoint = startPoint + 1

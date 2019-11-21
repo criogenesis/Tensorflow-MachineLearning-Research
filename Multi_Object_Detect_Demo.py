@@ -32,16 +32,13 @@ from utils import visualization_utils as vis_util
 
 
 # Name of the image being processed
-infile = 'test.png'
+infile = 'Desk1.jpg'
 
 # variables to be used for splicing
 # 300 is chosen as the default as the cursor and close box objects were trained
 # using images of that size.
 chopsizeWidth = 300
 chopsizeHeight = 300
-
-
-isFirstColumn = True
 
 # img is a 1920 x 1080(or whatever is the resolution of your current monitor)
 # desktop picture that is saved
@@ -230,20 +227,15 @@ for x0 in range(0, width+chopsizeWidth, chopsizeWidth):
             box_right = int(box[0] + value[1])
             box_bottom = int(box[1] + value[2])
             box_top = int(box[1] + value[3])
-            # print((box_left, box_right, box_bottom, box_top))
-            # print(box)
-            # print(value)
             if key != 'test':
                 elements = key.split()
-                # print(elements)
                 name = elements[0].strip(":")
                 percent = elements[1].split('%')[0]
                 percent_temp = int(percent)
+                print(percent_temp)
                 if name == "cursor" and percent_temp > cursor_percent_num:
                     cursor_percent_num = percent_temp
                     cursorImage = image
-
-                    # cursorCoords = tuple(map(operator.add, box, value))
                     cursorCoords = value
                 if name == "captcha" and percent_temp > captcha_percent_num:
                     captcha_percent_num = percent_temp
@@ -271,10 +263,6 @@ for x0 in range(0, width+chopsizeWidth, chopsizeWidth):
                     if close_bool is False:
                         closeImageList.append(image)
                         close_bool = True
-                        # percentTemp > percentNum:
-                        # percent_num = percentTemp
-                        # finalImage = image
-                        # print(str(percentNum) + "%")
 
         countIntro = countIntro + 1
         # print(key, value)

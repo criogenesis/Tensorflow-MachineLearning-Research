@@ -130,16 +130,6 @@ def recieve_object(object_to_detect_list):
 
     img = ImageGrab.grab()
 
-    # cursor png is used as a mask to include it in the screenshot capture
-    cursor = Image.open('cursor.png')
-
-    # screenshot is taken at time of script execution and cursor coordinates are
-    # saved here
-    curX, curY = win32gui.GetCursorPos()
-
-    # cursor is masked over the original screenshot and saved as a new image
-    img.paste(cursor, box=(curX, curY), mask=cursor)
-
     # width and height to be used as limits while iterating through cropped squares
     # As an example, width would equal 1920 and height would equal 1080
     width, height = img.size
